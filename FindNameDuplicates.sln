@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Libraries", "_Libraries", "{3719029D-8A28-4CBC-9EF5-046F3749676F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Setup", "Setup", "{0D96EF46-5407-4794-A69E-744C131389A0}"
+	ProjectSection(SolutionItems) = preProject
+		FindNameDuplicates\FindNameDuplicatesSetup\Setup.iss = FindNameDuplicates\FindNameDuplicatesSetup\Setup.iss
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDProfilerHelper", "DVDProfilerXML\DVDProfilerHelper\DVDProfilerHelper\DVDProfilerHelper.csproj", "{461DACCA-8EBF-4C03-AD1A-C438E4EB3B36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDProfilerXML", "DVDProfilerXML\DVDProfilerXML\DVDProfilerXML.csproj", "{2E90CC6F-892E-45B3-8812-EE52FFA3B222}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNameDuplicates", "FindNameDuplicates\FindNameDuplicates\FindNameDuplicates.csproj", "{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{461DACCA-8EBF-4C03-AD1A-C438E4EB3B36}.Debug|x86.ActiveCfg = Debug|x86
+		{461DACCA-8EBF-4C03-AD1A-C438E4EB3B36}.Debug|x86.Build.0 = Debug|x86
+		{2E90CC6F-892E-45B3-8812-EE52FFA3B222}.Debug|x86.ActiveCfg = Debug|x86
+		{2E90CC6F-892E-45B3-8812-EE52FFA3B222}.Debug|x86.Build.0 = Debug|x86
+		{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}.Debug|x86.ActiveCfg = Debug|x86
+		{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}.Debug|x86.Build.0 = Debug|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{461DACCA-8EBF-4C03-AD1A-C438E4EB3B36} = {3719029D-8A28-4CBC-9EF5-046F3749676F}
+		{2E90CC6F-892E-45B3-8812-EE52FFA3B222} = {3719029D-8A28-4CBC-9EF5-046F3749676F}
+	EndGlobalSection
+EndGlobal
