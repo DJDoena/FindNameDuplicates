@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVDProfilerXML", "DVDProfil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindNameDuplicates", "FindNameDuplicates\FindNameDuplicates\FindNameDuplicates.csproj", "{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Microsoft.WindowsAPICodePack\Core\Core.csproj", "{2E1FB0DF-F9BB-4909-9F32-2D9D022A8E57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Microsoft.WindowsAPICodePack\Shell\Shell.csproj", "{AA0C00CB-8699-4F37-BFAE-40CA87ACC06D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -27,6 +31,10 @@ Global
 		{2E90CC6F-892E-45B3-8812-EE52FFA3B222}.Debug|x86.Build.0 = Debug|x86
 		{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}.Debug|x86.ActiveCfg = Debug|x86
 		{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}.Debug|x86.Build.0 = Debug|x86
+		{2E1FB0DF-F9BB-4909-9F32-2D9D022A8E57}.Debug|x86.ActiveCfg = Debug|x86
+		{2E1FB0DF-F9BB-4909-9F32-2D9D022A8E57}.Debug|x86.Build.0 = Debug|x86
+		{AA0C00CB-8699-4F37-BFAE-40CA87ACC06D}.Debug|x86.ActiveCfg = Debug|x86
+		{AA0C00CB-8699-4F37-BFAE-40CA87ACC06D}.Debug|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,5 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{461DACCA-8EBF-4C03-AD1A-C438E4EB3B36} = {3719029D-8A28-4CBC-9EF5-046F3749676F}
 		{2E90CC6F-892E-45B3-8812-EE52FFA3B222} = {3719029D-8A28-4CBC-9EF5-046F3749676F}
+		{2E1FB0DF-F9BB-4909-9F32-2D9D022A8E57} = {3719029D-8A28-4CBC-9EF5-046F3749676F}
+		{AA0C00CB-8699-4F37-BFAE-40CA87ACC06D} = {3719029D-8A28-4CBC-9EF5-046F3749676F}
 	EndGlobalSection
 EndGlobal
