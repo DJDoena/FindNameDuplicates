@@ -155,6 +155,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
             if (TaskbarManager.IsPlatformSupported)
             {
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
+                TaskbarManager.Instance.OwnerHandle = IntPtr.Zero;
             }
             if (this.ProgressWindow != null)
             {
