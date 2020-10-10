@@ -1,7 +1,7 @@
-﻿using DoenaSoft.DVDProfiler.DVDProfilerXML.Version390;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text;
+using DoenaSoft.DVDProfiler.DVDProfilerXML.Version400;
 
 namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 {

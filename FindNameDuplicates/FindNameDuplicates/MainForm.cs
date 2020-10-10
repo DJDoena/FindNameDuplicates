@@ -1,14 +1,13 @@
-﻿using DoenaSoft.DVDProfiler.DVDProfilerHelper;
-using DoenaSoft.DVDProfiler.DVDProfilerXML;
-using DoenaSoft.DVDProfiler.DVDProfilerXML.Version390;
-using Invelos.DVDProfilerPlugin;
-using Microsoft.WindowsAPICodePack.Taskbar;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using DoenaSoft.DVDProfiler.DVDProfilerHelper;
+using DoenaSoft.DVDProfiler.DVDProfilerXML;
+using DoenaSoft.DVDProfiler.DVDProfilerXML.Version400;
+using Invelos.DVDProfilerPlugin;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 {
@@ -105,7 +104,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                         File.Delete(Plugin.ErrorFile);
                     }
                     exceptionXml = new ExceptionXml(ex);
-                    Serializer<ExceptionXml>.Serialize(Plugin.ErrorFile, exceptionXml);
+                    DVDProfilerSerializer<ExceptionXml>.Serialize(Plugin.ErrorFile, exceptionXml);
                 }
                 catch (Exception inEx)
                 {
@@ -133,7 +132,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                     String xml;
 
                     xml = (String)(this.Invoke(new GetProfileDataDelegate(this.GetProfileData), allIds[i]));
-                    dvd = Serializer<DVD>.FromString(xml, DVD.DefaultEncoding);
+                    dvd = DVDProfilerSerializer<DVD>.FromString(xml, DVD.DefaultEncoding);
                     dvdList.Add(dvd);
                     this.Invoke(new ProgressBarDelegate(this.UpdateProgressBar));
                 }

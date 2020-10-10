@@ -1,11 +1,11 @@
 [Setup]
 AppName=Find Name Duplicates
 AppId=FindNameDuplicates
-AppVerName=Find Name Duplicates 3.0.0.0
-AppCopyright=Copyright © Doena Soft. 2009 - 2015
+AppVerName=Find Name Duplicates 3.0.0.1
+AppCopyright=Copyright © Doena Soft. 2009 - 2020
 AppPublisher=Doena Soft.
 AppPublisherURL=http://doena-journal.net/en/dvd-profiler-tools/
-DefaultDirName={pf32}\Doena Soft.\Find Name Duplicates
+DefaultDirName={commonpf32}\Doena Soft.\Find Name Duplicates
 ; DefaultGroupName=Doena Soft.
 DirExistsWarning=No
 SourceDir=..\FindNameDuplicates\bin\x86\FindNameDuplicates
@@ -13,16 +13,16 @@ Compression=zip/9
 AppMutex=InvelosDVDPro
 OutputBaseFilename=FindNameDuplicatesSetup
 OutputDir=..\..\..\..\FindNameDuplicatesSetup\Setup\FindNameDuplicates
-MinVersion=0,5.1
+MinVersion=0,6.0
 PrivilegesRequired=admin
 WizardImageFile=compiler:wizmodernimage-is.bmp
 WizardSmallImageFile=compiler:wizmodernsmallimage-is.bmp
 DisableReadyPage=yes
 ShowLanguageDialog=no
 VersionInfoCompany=Doena Soft.
-VersionInfoCopyright=2009 - 2015
+VersionInfoCopyright=2009 - 2020
 VersionInfoDescription=Find Name Duplicates Setup
-VersionInfoVersion=3.0.0.0
+VersionInfoVersion=3.0.0.1
 UninstallDisplayIcon={app}\djdsoft.ico
 
 [Languages]
