@@ -14,9 +14,12 @@ You can find this program and other DVD Profiler related programs under
 http://doena-journal.net/en/dvd-profiler-tools/
 
 === Contact ===
-Karsten@yajirobi.de
+errorreport@doena-soft.de
 
 === Version Hints ===
+== Verion 3.0.0.2 ==
+Adapted to new API of DVD Profiler 4.0.
+
 == Verion 2.1.0.0 ==
 Adapted to new API of DVD Profiler 3.8.1.
 

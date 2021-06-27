@@ -42,9 +42,9 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
         #region Constructor
         public MainForm(IDVDProfilerAPI api)
         {
-            this.Api = api;
-            this.CanClose = true;
-            InitializeComponent();
+            Api = api;
+            CanClose = true;
+            this.InitializeComponent();
         }
         #endregion
 
@@ -52,35 +52,35 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
         {
             try
             {
-                this.CanClose = false;
+                CanClose = false;
                 this.UseWaitCursor = true;
                 this.Cursor = Cursors.WaitCursor;
                 this.Enabled = false;
-                this.CastBasicNameListBox.Items.Clear();
-                this.CastFullNameListBox.Items.Clear();
-                this.CastDVDNameListBox.Items.Clear();
-                this.CrewBasicNameListBox.Items.Clear();
-                this.CrewFullNameListBox.Items.Clear();
-                this.CrewDVDNameListBox.Items.Clear();
-                this.CastDuplicates = new DuplicateHash();
-                this.CrewDuplicates = new DuplicateHash();
-                if (this.Collection == null)
+                CastBasicNameListBox.Items.Clear();
+                CastFullNameListBox.Items.Clear();
+                CastDVDNameListBox.Items.Clear();
+                CrewBasicNameListBox.Items.Clear();
+                CrewFullNameListBox.Items.Clear();
+                CrewDVDNameListBox.Items.Clear();
+                CastDuplicates = new DuplicateHash();
+                CrewDuplicates = new DuplicateHash();
+                if (Collection == null)
                 {
                     Thread thread;
                     Object[] allIds;
 
-                    this.ProgressWindow = new ProgressWindow();
-                    this.ProgressWindow.ProgressBar.Minimum = 0;
-                    this.ProgressWindow.ProgressBar.Step = 1;
-                    this.ProgressWindow.CanClose = false;
-                    allIds = (Object[])(this.Api.GetAllProfileIDs());
-                    this.ProgressWindow.ProgressBar.Maximum = allIds.Length;
-                    this.ProgressWindow.Show();
+                    ProgressWindow = new ProgressWindow();
+                    ProgressWindow.ProgressBar.Minimum = 0;
+                    ProgressWindow.ProgressBar.Step = 1;
+                    ProgressWindow.CanClose = false;
+                    allIds = (Object[])(Api.GetAllProfileIDs());
+                    ProgressWindow.ProgressBar.Maximum = allIds.Length;
+                    ProgressWindow.Show();
                     if (TaskbarManager.IsPlatformSupported)
                     {
                         TaskbarManager.Instance.OwnerHandle = this.Handle;
                         TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
-                        TaskbarManager.Instance.SetProgressValue(0, this.ProgressWindow.ProgressBar.Maximum);
+                        TaskbarManager.Instance.SetProgressValue(0, ProgressWindow.ProgressBar.Maximum);
                     }
                     thread = new Thread(new ParameterizedThreadStart(this.ThreadRun));
                     thread.IsBackground = false;
@@ -88,7 +88,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                 }
                 else
                 {
-                    this.ThreadFinished(this.Collection);
+                    this.ThreadFinished(Collection);
                 }
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Invoke(new Action(() => MessageBox.Show(this, ex.Message, MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error)));
             }
             finally
             {
@@ -156,15 +156,15 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
                 TaskbarManager.Instance.OwnerHandle = IntPtr.Zero;
             }
-            if (this.ProgressWindow != null)
+            if (ProgressWindow != null)
             {
-                this.ProgressWindow.CanClose = true;
-                this.ProgressWindow.Close();
-                this.ProgressWindow.Dispose();
-                this.ProgressWindow = null;
+                ProgressWindow.CanClose = true;
+                ProgressWindow.Close();
+                ProgressWindow.Dispose();
+                ProgressWindow = null;
             }
-            this.Collection = collection;
-            if (this.Collection != null)
+            Collection = collection;
+            if (Collection != null)
             {
                 if (collection.DVDList != null && collection.DVDList.Length >= 0)
                 {
@@ -182,7 +182,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                                 IPerson xmlPerson;
 
                                 xmlPerson = dvd.CastList[i] as IPerson;
-                                this.ProcessXmlPerson(dvdName, xmlPerson, this.CastDuplicates);
+                                this.ProcessXmlPerson(dvdName, xmlPerson, CastDuplicates);
                             }
                         }
                         dvdName = new DVDName(dvd, false);
@@ -193,12 +193,12 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                                 IPerson xmlPerson;
 
                                 xmlPerson = dvd.CrewList[i] as IPerson;
-                                this.ProcessXmlPerson(dvdName, xmlPerson, this.CrewDuplicates);
+                                this.ProcessXmlPerson(dvdName, xmlPerson, CrewDuplicates);
                             }
                         }
                     }
                     duplicates = new List<Person>();
-                    foreach (KeyValuePair<Person, Dictionary<CompletePerson, List<DVDName>>> keyValue in this.CastDuplicates)
+                    foreach (KeyValuePair<Person, Dictionary<CompletePerson, List<DVDName>>> keyValue in CastDuplicates)
                     {
                         if (keyValue.Value.Count > 1)
                         {
@@ -206,9 +206,9 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                         }
                     }
                     duplicates.Sort(ComparePerson);
-                    this.CastBasicNameListBox.Items.AddRange(duplicates.ToArray());
+                    CastBasicNameListBox.Items.AddRange(duplicates.ToArray());
                     duplicates = new List<Person>();
-                    foreach (KeyValuePair<Person, Dictionary<CompletePerson, List<DVDName>>> keyValue in this.CrewDuplicates)
+                    foreach (KeyValuePair<Person, Dictionary<CompletePerson, List<DVDName>>> keyValue in CrewDuplicates)
                     {
                         if (keyValue.Value.Count > 1)
                         {
@@ -216,14 +216,14 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                         }
                     }
                     duplicates.Sort(ComparePerson);
-                    this.CrewBasicNameListBox.Items.AddRange(duplicates.ToArray());
+                    CrewBasicNameListBox.Items.AddRange(duplicates.ToArray());
                 }
                 MessageBox.Show(this, MessageBoxTexts.Done, MessageBoxTexts.InformationHeader, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Enabled = true;
             this.Cursor = Cursors.Default;
             this.UseWaitCursor = false;
-            this.CanClose = true;
+            CanClose = true;
         }
 
         private void ProcessXmlPerson(DVDName dvdName, IPerson xmlPerson, DuplicateHash duplicates)
@@ -238,14 +238,14 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
                 person = new Person(xmlPerson);
                 completePerson = new CompletePerson(xmlPerson);
                 this.ProcessPerson(person, completePerson, dvdName, duplicates);
-                if ((this.CheckCreditedAsCheckBox.Checked) && (String.IsNullOrEmpty(xmlPerson.CreditedAs) == false))
+                if ((CheckCreditedAsCheckBox.Checked) && (String.IsNullOrEmpty(xmlPerson.CreditedAs) == false))
                 {
                     CreditedAsPerson creditedAsPerson;
 
                     creditedAsPerson = new CreditedAsPerson(xmlPerson);
                     this.ProcessPerson(creditedAsPerson, completePerson, dvdName, duplicates);
                 }
-                if (this.CheckWithoutMiddleNameCheckBox.Checked)
+                if (CheckWithoutMiddleNameCheckBox.Checked)
                 {
                     NoMiddleNamePerson noMiddleNamePerson;
 
@@ -300,79 +300,79 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 
         private void OnCastBasicNameListBoxSelectedIndexChanged(Object sender, EventArgs e)
         {
-            if (this.CastBasicNameListBox.SelectedIndex != -1)
+            if (CastBasicNameListBox.SelectedIndex != -1)
             {
                 Person person;
                 Dictionary<CompletePerson, List<DVDName>> duplicates;
                 List<Person> list;
 
-                this.CastFullNameListBox.Items.Clear();
-                this.CastDVDNameListBox.Items.Clear();
-                person = (Person)(this.CastBasicNameListBox.Items[this.CastBasicNameListBox.SelectedIndex]);
-                duplicates = this.CastDuplicates[person];
+                CastFullNameListBox.Items.Clear();
+                CastDVDNameListBox.Items.Clear();
+                person = (Person)(CastBasicNameListBox.Items[CastBasicNameListBox.SelectedIndex]);
+                duplicates = CastDuplicates[person];
                 list = new List<Person>();
                 foreach (CompletePerson completePerson in duplicates.Keys)
                 {
                     list.Add(completePerson);
                 }
                 list.Sort(ComparePerson);
-                this.CastFullNameListBox.Items.AddRange(list.ToArray());
+                CastFullNameListBox.Items.AddRange(list.ToArray());
             }
         }
 
         private void OnCastFullNameListBoxSelectedIndexChanged(Object sender, EventArgs e)
         {
-            if (this.CastFullNameListBox.SelectedIndex != -1)
+            if (CastFullNameListBox.SelectedIndex != -1)
             {
                 Person person;
                 CompletePerson completePerson;
                 List<DVDName> dvds;
 
-                this.CastDVDNameListBox.Items.Clear();
-                person = (Person)(this.CastBasicNameListBox.Items[this.CastBasicNameListBox.SelectedIndex]);
-                completePerson = (CompletePerson)(this.CastFullNameListBox.Items[this.CastFullNameListBox.SelectedIndex]);
-                dvds = this.CastDuplicates[person][completePerson];
+                CastDVDNameListBox.Items.Clear();
+                person = (Person)(CastBasicNameListBox.Items[CastBasicNameListBox.SelectedIndex]);
+                completePerson = (CompletePerson)(CastFullNameListBox.Items[CastFullNameListBox.SelectedIndex]);
+                dvds = CastDuplicates[person][completePerson];
                 dvds.Sort(CompareDVDName);
-                this.CastDVDNameListBox.Items.AddRange(dvds.ToArray());
+                CastDVDNameListBox.Items.AddRange(dvds.ToArray());
             }
         }
 
         private void OnCrewBasicNameListBoxSelectedIndexChanged(Object sender, EventArgs e)
         {
-            if (this.CrewBasicNameListBox.SelectedIndex != -1)
+            if (CrewBasicNameListBox.SelectedIndex != -1)
             {
                 Person person;
                 Dictionary<CompletePerson, List<DVDName>> duplicates;
                 List<Person> list;
 
-                this.CrewFullNameListBox.Items.Clear();
-                this.CrewDVDNameListBox.Items.Clear();
-                person = (Person)(this.CrewBasicNameListBox.Items[this.CrewBasicNameListBox.SelectedIndex]);
-                duplicates = this.CrewDuplicates[person];
+                CrewFullNameListBox.Items.Clear();
+                CrewDVDNameListBox.Items.Clear();
+                person = (Person)(CrewBasicNameListBox.Items[CrewBasicNameListBox.SelectedIndex]);
+                duplicates = CrewDuplicates[person];
                 list = new List<Person>();
                 foreach (CompletePerson completePerson in duplicates.Keys)
                 {
                     list.Add(completePerson);
                 }
                 list.Sort(ComparePerson);
-                this.CrewFullNameListBox.Items.AddRange(list.ToArray());
+                CrewFullNameListBox.Items.AddRange(list.ToArray());
             }
         }
 
         private void OnCrewFullNameListBoxSelectedIndexChanged(Object sender, EventArgs e)
         {
-            if (this.CrewFullNameListBox.SelectedIndex != -1)
+            if (CrewFullNameListBox.SelectedIndex != -1)
             {
                 Person person;
                 CompletePerson completePerson;
                 List<DVDName> dvds;
 
-                this.CrewDVDNameListBox.Items.Clear();
-                person = (Person)(this.CrewBasicNameListBox.Items[this.CrewBasicNameListBox.SelectedIndex]);
-                completePerson = (CompletePerson)(this.CrewFullNameListBox.Items[this.CrewFullNameListBox.SelectedIndex]);
-                dvds = this.CrewDuplicates[person][completePerson];
+                CrewDVDNameListBox.Items.Clear();
+                person = (Person)(CrewBasicNameListBox.Items[CrewBasicNameListBox.SelectedIndex]);
+                completePerson = (CompletePerson)(CrewFullNameListBox.Items[CrewFullNameListBox.SelectedIndex]);
+                dvds = CrewDuplicates[person][completePerson];
                 dvds.Sort(CompareDVDName);
-                this.CrewDVDNameListBox.Items.AddRange(dvds.ToArray());
+                CrewDVDNameListBox.Items.AddRange(dvds.ToArray());
             }
         }
 
@@ -384,9 +384,9 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
         private void OnMainFormLoad(Object sender, EventArgs e)
         {
             this.SuspendLayout();
-            this.CheckCreditedAsCheckBox.Checked = Plugin.Settings.DefaultValues.CheckCreditedAs;
-            this.CheckWithoutMiddleNameCheckBox.Checked = Plugin.Settings.DefaultValues.CheckMissingMiddleName;
-            this.ReloadCheckBox.Checked = Plugin.Settings.DefaultValues.ReloadAfterSavingProfile;
+            CheckCreditedAsCheckBox.Checked = Plugin.Settings.DefaultValues.CheckCreditedAs;
+            CheckWithoutMiddleNameCheckBox.Checked = Plugin.Settings.DefaultValues.CheckMissingMiddleName;
+            ReloadCheckBox.Checked = Plugin.Settings.DefaultValues.ReloadAfterSavingProfile;
             if (Plugin.Settings.MainForm.WindowState == FormWindowState.Normal)
             {
                 this.Left = Plugin.Settings.MainForm.Left;
@@ -415,7 +415,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 
         private void OnMainFormClosing(Object sender, FormClosingEventArgs e)
         {
-            if (this.CanClose == false)
+            if (CanClose == false)
             {
                 e.Cancel = true;
                 return;
@@ -426,9 +426,9 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
             Plugin.Settings.MainForm.Height = this.Height;
             Plugin.Settings.MainForm.WindowState = this.WindowState;
             Plugin.Settings.MainForm.RestoreBounds = this.RestoreBounds;
-            Plugin.Settings.DefaultValues.CheckCreditedAs = this.CheckCreditedAsCheckBox.Checked;
-            Plugin.Settings.DefaultValues.CheckMissingMiddleName = this.CheckWithoutMiddleNameCheckBox.Checked;
-            Plugin.Settings.DefaultValues.ReloadAfterSavingProfile = this.ReloadCheckBox.Checked;
+            Plugin.Settings.DefaultValues.CheckCreditedAs = CheckCreditedAsCheckBox.Checked;
+            Plugin.Settings.DefaultValues.CheckMissingMiddleName = CheckWithoutMiddleNameCheckBox.Checked;
+            Plugin.Settings.DefaultValues.ReloadAfterSavingProfile = ReloadCheckBox.Checked;
         }
 
         private void CheckForNewVersion()
@@ -467,10 +467,10 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 
         private void UpdateProgressBar()
         {
-            this.ProgressWindow.ProgressBar.PerformStep();
+            ProgressWindow.ProgressBar.PerformStep();
             if (TaskbarManager.IsPlatformSupported)
             {
-                TaskbarManager.Instance.SetProgressValue(this.ProgressWindow.ProgressBar.Value, this.ProgressWindow.ProgressBar.Maximum);
+                TaskbarManager.Instance.SetProgressValue(ProgressWindow.ProgressBar.Value, ProgressWindow.ProgressBar.Maximum);
             }
         }
 
@@ -479,7 +479,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
             IDVDInfo dvdInfo;
             String xml;
 
-            this.Api.DVDByProfileID(out dvdInfo, id, -1, -1);
+            Api.DVDByProfileID(out dvdInfo, id, -1, -1);
             xml = dvdInfo.GetXML(true);
             return (xml);
         }
@@ -490,20 +490,20 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 
         private void OnCastDVDNameListBoxMouseDoubleClick(Object sender, MouseEventArgs e)
         {
-            if (this.CastDVDNameListBox.SelectedIndex != -1)
+            if (CastDVDNameListBox.SelectedIndex != -1)
             {
                 DVDName dvdName;
 
-                dvdName = (DVDName)(this.CastDVDNameListBox.Items[this.CastDVDNameListBox.SelectedIndex]);
-                this.Api.SelectDVDByProfileID(dvdName.Id);
+                dvdName = (DVDName)(CastDVDNameListBox.Items[CastDVDNameListBox.SelectedIndex]);
+                Api.SelectDVDByProfileID(dvdName.Id);
             }
         }
 
         internal void UpdateProfile()
         {
-            if (this.ReloadCheckBox.Checked)
+            if (ReloadCheckBox.Checked)
             {
-                this.Collection = null;
+                Collection = null;
                 this.OnProcessButtonClick(this, EventArgs.Empty);
             }
         }
