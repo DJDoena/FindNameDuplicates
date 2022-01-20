@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Doena Soft.")]
 [assembly: AssemblyProduct("Find Name Duplicates")]
-[assembly: AssemblyCopyright("Copyright © Doena Soft. 2009 - 2021")]
+[assembly: AssemblyCopyright("Copyright © Doena Soft. 2009 - 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

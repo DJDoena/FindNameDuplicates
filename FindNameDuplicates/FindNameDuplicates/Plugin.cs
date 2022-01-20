@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml.Serialization;
-using DoenaSoft.DVDProfiler.DVDProfilerXML;
-using DoenaSoft.DVDProfiler.DVDProfilerHelper;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using DoenaSoft.DVDProfiler.DVDProfilerHelper;
 using Invelos.DVDProfilerPlugin;
 
 namespace DoenaSoft.DVDProfiler.FindNameDuplicates
@@ -36,66 +33,66 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
         {
             ErrorFile = Environment.GetEnvironmentVariable("TEMP") + @"\FindNameDuplicatesCrash.xml";
         }
-        
+
         public Plugin()
         {
-            this.ApplicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Doena Soft\Find Name Duplicates\";
-            this.SettingsFile = ApplicationPath + "FindNameDuplicatesSettings.xml";            
+            ApplicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Doena Soft\Find Name Duplicates\";
+            SettingsFile = ApplicationPath + "FindNameDuplicatesSettings.xml";
         }
 
         #region IDVDProfilerPlugin Members
         public void Load(IDVDProfilerAPI api)
         {
-            this.WindowHandle = new WindowHandle();
-            this.Api = api;
-            if(Directory.Exists(this.ApplicationPath) == false)
+            WindowHandle = new WindowHandle();
+            Api = api;
+            if (Directory.Exists(ApplicationPath) == false)
             {
-                Directory.CreateDirectory(this.ApplicationPath);
+                Directory.CreateDirectory(ApplicationPath);
             }
-            if(File.Exists(this.SettingsFile))
+            if (File.Exists(SettingsFile))
             {
                 try
                 {
-                    Settings = Settings.Deserialize(this.SettingsFile);
+                    Settings = Settings.Deserialize(SettingsFile);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeRead, this.SettingsFile, ex.Message)
+                    MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeRead, SettingsFile, ex.Message)
                         , MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             CreateSettings();
-            MenuTokenISCP = this.Api.RegisterMenuItem(PluginConstants.FORMID_Main, PluginConstants.MENUID_Form
+            MenuTokenISCP = Api.RegisterMenuItem(PluginConstants.FORMID_Main, PluginConstants.MENUID_Form
                 , "Collection", Texts.PluginName, MenuId);
-            this.Api.RegisterForEvent(PluginConstants.EVENTID_DVDEditSave);
+            Api.RegisterForEvent(PluginConstants.EVENTID_DVDEditSave);
         }
 
         public void Unload()
         {
-            this.Api.UnregisterMenuItem(MenuTokenISCP);
+            Api.UnregisterMenuItem(MenuTokenISCP);
             try
             {
-                Settings.Serialize(this.SettingsFile);
+                Settings.Serialize(SettingsFile);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, this.SettingsFile, ex.Message)
+                MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, SettingsFile, ex.Message)
                     , MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Api = null;
+            Api = null;
         }
 
         public void HandleEvent(Int32 EventType, Object EventData)
         {
-            if(EventType == PluginConstants.EVENTID_CustomMenuClick)
+            if (EventType == PluginConstants.EVENTID_CustomMenuClick)
             {
                 this.HandleMenuClick((Int32)EventData);
             }
-            if(EventType == PluginConstants.EVENTID_DVDEditSave)
+            if (EventType == PluginConstants.EVENTID_DVDEditSave)
             {
-                if(this.MainForm != null)
+                if (MainForm != null)
                 {
-                    this.MainForm.UpdateProfile();
+                    MainForm.UpdateProfile();
                 }
             }
         }
@@ -158,26 +155,26 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 
         private void HandleMenuClick(Int32 MenuEventID)
         {
-            if(MenuEventID == MenuId)
+            if (MenuEventID == MenuId)
             {
-                if(this.MainForm == null)
-                {                    
-                    this.MainForm = new MainForm(this.Api);
-                    this.MainForm.FormClosed += this.OnMainFormClosed;
-                    this.MainForm.Show(this.WindowHandle);
+                if (MainForm == null)
+                {
+                    MainForm = new MainForm(Api);
+                    MainForm.FormClosed += this.OnMainFormClosed;
+                    MainForm.Show(WindowHandle);
                 }
                 else
                 {
-                    this.MainForm.Focus();
+                    MainForm.Focus();
                 }
             }
         }
 
         private void OnMainFormClosed(Object sender, FormClosedEventArgs e)
         {
-            this.MainForm.FormClosed -= this.OnMainFormClosed;
-            this.MainForm.Dispose();
-            this.MainForm = null;
+            MainForm.FormClosed -= this.OnMainFormClosed;
+            MainForm.Dispose();
+            MainForm = null;
         }
 
         private static void CreateSettings()
@@ -190,7 +187,7 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
             {
                 Settings.MainForm = new SizableForm();
             }
-            if(Settings.DefaultValues == null)
+            if (Settings.DefaultValues == null)
             {
                 Settings.DefaultValues = new DefaultValues();
             }
