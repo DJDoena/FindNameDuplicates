@@ -1,117 +1,81 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{241E6EF1-D4F4-4B97-AA5A-C60AC3FE8F24}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DoenaSoft.DVDProfiler.FindNameDuplicates</RootNamespace>
-    <AssemblyName>DoenaSoft.FindNameDuplicates</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>DJDSOFT.ICO</ApplicationIcon>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\FindNameDuplicates\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <RegisterForComInterop>true</RegisterForComInterop>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>FindNameDuplicates.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\PluginInterface\DVDProfiler.Interface\PluginInterface.5.cs">
-      <Link>PluginInterface.5.cs</Link>
-    </Compile>
-    <Compile Include="DefaultValues.cs" />
-    <Compile Include="DVDName.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MessageBoxTexts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MessageBoxTexts.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Person.cs" />
-    <Compile Include="Plugin.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Texts.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Texts.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DJDSOFT.ICO">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Readme\readme.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="FindNameDuplicates.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MessageBoxTexts.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MessageBoxTexts.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Texts.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Texts.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="DoenaSoft.DVDProfilerXML">
-      <Version>4.1.2</Version>
-    </PackageReference>
-    <PackageReference Include="DoenaSoft.WindowsAPICodePack">
-      <Version>1.1.1</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy /y ..\..\..\djdsoft.ico .
-"%25ProgramFiles(x86)%25\Inno Setup 6\iscc.exe"  ..\..\..\..\FindNameDuplicatesSetup\Setup.iss</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>DoenaSoft.FindNameDuplicates</AssemblyName>
+		<RootNamespace>DoenaSoft.DVDProfiler.FindNameDuplicates</RootNamespace>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>net481</TargetFrameworks>
+		<Platforms>x86</Platforms>
+		<ApplicationIcon>DJDSOFT.ICO</ApplicationIcon>
+		<UseWindowsForms>true</UseWindowsForms>
+		<EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>FindNameDuplicates.snk</AssemblyOriginatorKeyFile>
+		<EnableComHosting>true</EnableComHosting>
+		<Title>Find Name Duplicates</Title>
+		<Description>This program helps you to identify possible duplicate entries in cast and crew.</Description>
+		<Company>Doena Soft.</Company>
+		<Authors>DJ Doena</Authors>
+		<Copyright>Copyright © Doena Soft. 2009 - 2026</Copyright>
+		<Version>3.0.1</Version>
+		<FileVersion>3.0.1</FileVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\..\PluginInterface\DVDProfiler.Interface\PluginInterface.5.cs" Link="PluginInterface.5.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DoenaSoft.DVDProfiler.Xml" Version="5.0.11" />
+		<PackageReference Include="DoenaSoft.WindowsAPICodePack" Version="3.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Web" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="MessageBoxTexts.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>MessageBoxTexts.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Texts.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Texts.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="MessageBoxTexts.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>MessageBoxTexts.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="MessageBoxTexts.de.resx">
+			<DependentUpon>MessageBoxTexts.resx</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Texts.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Texts.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Texts.de.resx">
+			<DependentUpon>Texts.resx</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="djdsoft.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Readme\readme.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="&quot;C:\Windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe&quot; /codebase &quot;bin\$(Platform)\$(Configuration)\$(TargetFramework)\DoenaSoft.FindNameDuplicates.dll&quot;&#xD;&#xA;IF &quot;$(Configuration)&quot;==&quot;Release&quot; &quot;%25ProgramFiles(x86)%25\Inno Setup 6\iscc.exe&quot; &quot;..\FindNameDuplicatesSetup\Setup.iss&quot;" />
+	</Target>
+
 </Project>

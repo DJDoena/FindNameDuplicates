@@ -1,27 +1,27 @@
 [Setup]
 AppName=Find Name Duplicates
 AppId=FindNameDuplicates
-AppVerName=Find Name Duplicates 3.0.0.2
-AppCopyright=Copyright © Doena Soft. 2009 - 2022
+AppVerName=Find Name Duplicates 3.0.1
+AppCopyright=Copyright © Doena Soft. 2009 - 2026
 AppPublisher=Doena Soft.
 AppPublisherURL=http://doena-journal.net/en/dvd-profiler-tools/
 DefaultDirName={commonpf32}\Doena Soft.\Find Name Duplicates
 ; DefaultGroupName=Doena Soft.
 DirExistsWarning=No
-SourceDir=..\FindNameDuplicates\bin\x86\FindNameDuplicates
+SourceDir=..\FindNameDuplicates\bin\x86\Release\net481
 Compression=zip/9
 AppMutex=InvelosDVDPro
 OutputBaseFilename=FindNameDuplicatesSetup
-OutputDir=..\..\..\..\FindNameDuplicatesSetup\Setup\FindNameDuplicates
+OutputDir=..\..\..\..\..\FindNameDuplicatesSetup\Setup\FindNameDuplicates
 MinVersion=0,6.1sp1
 PrivilegesRequired=admin
 WizardStyle=modern
 DisableReadyPage=yes
 ShowLanguageDialog=no
 VersionInfoCompany=Doena Soft.
-VersionInfoCopyright=2009 - 2022
+VersionInfoCopyright=2009 - 2025
 VersionInfoDescription=Find Name Duplicates Setup
-VersionInfoVersion=3.0.0.2
+VersionInfoVersion=3.0.1
 UninstallDisplayIcon={app}\djdsoft.ico
 
 [Languages]
@@ -35,14 +35,11 @@ Name: "full"; Description: "Full installation"
 
 [Files]
 Source: "djdsoft.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.DVDProfilerHelper.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.DVDProfilerXML.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.FindNameDuplicates.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.FindNameDuplicates.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.WindowsAPICodePack.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "de\DoenaSoft.DVDProfilerHelper.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "*.pdb"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "de\*.dll"; DestDir: "{app}\de"; Flags: ignoreversion
 
 Source: "Readme\readme.txt"; DestDir: "{app}\Readme"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

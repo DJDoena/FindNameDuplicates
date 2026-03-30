@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DoenaSoft.DVDProfiler.DVDProfilerHelper;
+using DoenaSoft.DVDProfiler.DVDProfilerXML;
 using Invelos.DVDProfilerPlugin;
 
 namespace DoenaSoft.DVDProfiler.FindNameDuplicates
@@ -31,6 +32,8 @@ namespace DoenaSoft.DVDProfiler.FindNameDuplicates
 
         static Plugin()
         {
+            DVDProfilerXMLAssemblyLoader.Load();
+
             ErrorFile = Environment.GetEnvironmentVariable("TEMP") + @"\FindNameDuplicatesCrash.xml";
         }
 
